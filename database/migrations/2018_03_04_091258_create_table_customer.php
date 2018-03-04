@@ -1,13 +1,12 @@
 <?php
+
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\QueryException;
 
-class CreateUsersTable extends Migration
+class CreateTableCustomer extends Migration
 {
-    # https://laravel.com/docs/5.0/migrations
-    
     /**
      * Run the migrations.
      *
@@ -17,14 +16,13 @@ class CreateUsersTable extends Migration
     {
         Schema::defaultStringLength(191);
         
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('customers', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('email',100)->unique();
-            $table->string('password');
-            $table->rememberToken();
+            $table->string('customerName', 50)->nullable();
+            $table->string('city', 100)->nullable();
+            $table->string('address', 100)->nullable();
+            $table->string('zipCode', 10)->nullable();
             $table->timestamps();
-
             
         });
     }
@@ -36,6 +34,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('customers');
     }
 }

@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,6 +13,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
 
 
 // create route
@@ -31,6 +32,8 @@ Route::get('regularExpression/{name}', function($name) {
 
 
 
+
+
 # Named Routes
 Route::get('route-01',['as' => 'myRoute-01', function() {
     echo 'route 01';
@@ -43,6 +46,8 @@ Route::get('returnRoute', function() {
     return redirect()->route('myRoute-01'); 
     # return redirect()->route('myRoute-02');
 });
+
+
 
 
 
@@ -66,9 +71,13 @@ Route::group(['prefix' => 'myGroup'], function() {
 
 
 
+
+
 # Controller function -> route
 Route::get('getParameters/{name}', 'usersController@getParameters')->where('name', '[a-z]+');
 Route::get('postUpController', 'usersController@postUpController');
+
+
 
 
 
@@ -83,14 +92,20 @@ Route::post('postUser', 'usersController@postUser')->name('postOneUser');
 
 
 
+
+# #####################################################################
 # Cookie
+# #####################################################################
 Route::get('setCookie', 'usersController@setCookie')->name('setCookie');
 Route::get('getCookie', 'usersController@getCookie')->name('getCookie');
 
 
 
 
+
+# #####################################################################
 # Upload file
+# #####################################################################
 Route::get('fileUpload', function () {
     return view('postUpload');
 });
@@ -99,13 +114,19 @@ Route::post('postUpload', 'usersController@postUpload')->name('postUpload');
 
 
 
+
+# #####################################################################
 # output JSON
+# #####################################################################
 Route::get('getJSON', 'usersController@getJSON')->name('getJSON');
 
 
 
 
+
+# #####################################################################
 # VIEW
+# #####################################################################
 Route::get('viewTutorial', 'usersController@viewTutorial')->name('viewTutorial');
 Route::get('viewTutorial/{user}', 'usersController@viewTutorialUser')->name('viewTutorialUser');
 view()->share('userViewShare', 'pinnguyen208');
@@ -113,10 +134,229 @@ view()->share('userViewShare', 'pinnguyen208');
 
 
 
+
+# #####################################################################
 #  Blade template
+# #####################################################################
 Route::get('bladeTemplate', function () {
     # return view('components.php');       # => return component
     # return view('components.laravel'); # => return component
     return view('layouts.viewMaster'); # => return layout master
 });
 Route::get('bladeTemplate/{nameView}', 'usersController@bladeTemplate');
+
+
+
+
+# #####################################################################
+# DATABASE
+# #####################################################################
+# Schema https://laravel.com/docs/5.0/schema
+# create table
+Route::get('db/create-table-test', function () {
+    Schema::create('test', function($table) {
+        $table->increments('id');
+        $table->string('test1', 50)->nullable();
+        $table->string('test2', 50);
+        $table->string('test3', 50)->default('tình yêu');
+        
+    });
+    echo "created table test";
+    
+});
+Route::get('db/create-table-categories', function () {
+    Schema::create('categories', function ($table) {
+        $table->increments('id');
+        $table->string('categoryName', 50)->nullable();
+    });
+    echo "created table categories";
+});
+Route::get('db/create-table-products', function () {
+    Schema::create('products', function ($table) {
+        $table->increments('id'); # id tự động tăng
+        $table->string('name', 50)->nullable();
+        $table->string('price', 50)->nullable()->default('$1000');
+        $table->text('desciption')->nullable();
+
+        $table->integer('categoryId')->unsigned();
+        $table->foreign('categoryId')->references('id')->on('categories');
+    });
+    echo "created table products";
+});
+
+
+
+# add colum table
+Route::get('db/add-column-table-test', function () {
+    Schema::table('test', function($table) {
+        $table->string('newcolumn', 50);
+    });
+    echo "added column newcolumn in table test";
+    
+});
+
+
+# rename colum table
+Route::get('db/rename-column-table-test', function () {
+    Schema::rename('test', 'newtable');
+    echo "renamed table";
+});
+
+
+
+# delete colum table
+Route::get('db/del-column-table-newtable', function () {
+    Schema::table('test', function($table) {
+        $table->dropColumn('newtable');
+    });
+    echo 'deleled column newtable';
+});
+
+
+
+
+# drop table
+Route::get('db/drop-table-newtable', function () {
+    Schema::dropIfExists('newtable');
+    echo "droped table newtable";
+});
+Route::get('db/drop-table-newtable', function () {
+    Schema::drop('newtable');
+    echo "droped table newtable";
+});
+
+
+
+# #####################################################################
+# QUERY DB
+# #####################################################################
+# DB::table($table)-> bảng {table}
+# get()     lấy dữ liệu => trả về array([0],object())
+Route::get('db/getData/table/{table}', function ($table) {
+    $data = DB::table($table)->
+            get();
+    # var_dump($data);
+    foreach ($data as $row) {
+        foreach ($row as $col => $value) {
+            echo '"' . $col .'":"' . $value . '",  ';
+        }
+        echo '<hr/>';
+    }
+});
+
+# where('id','=',$id)-> Điều kiện id = {id}
+Route::get('db/getData/table/{table}/{id}', function ($name,$id) {
+    $data = DB::table($name)->
+            where('id','=',$id)->
+            get();
+    foreach ($data as $row) {
+        foreach ($row as $col => $value) {
+           echo $col . ':' . $value . ', ';
+        }
+    }
+});
+
+# select(['name','email','password'])->  lấy các cột tương ứng
+Route::get('db/getData/select/user/{id}', function ($id) {
+    $data = DB::table('users')->
+            select(['name','email','password'])->
+            where('id',$id)->
+            get();
+    foreach ($data as $row) {
+        foreach ($row as $col => $value) {
+           echo $col . ':' . $value . ', ';
+        }
+    }
+});
+
+# DB::raw('name as `họ tên`, password as `mật khẩu`')-> query 
+Route::get('db/getData/select/renameColumn', function () {
+    $data = DB::table('users')->
+            select(DB::raw('name as `họ tên`, password as `mật khẩu`'))->
+            where('id',10)->get();
+    foreach ($data as $row) {
+        foreach ($row as $col => $value) {
+           echo $col . ':' . $value . ', ';
+        }
+        echo '<br/>';
+    }
+});
+
+# orderBy('id','desc')-> sắp xếp ngược 12 11 10 ....
+Route::get('db/getData/orderBy', function () {
+    $data = DB::table('users')->
+            select(DB::raw('id, name, password'))->
+            orderBy('id','desc')->
+            get();
+    foreach ($data as $row) {
+        foreach ($row as $col => $value) {
+           echo $col . ':' . $value . ', ';
+        }
+        echo '<br/>';
+    }
+});
+
+# skip(5)-> bỏ qua 5 phần tử đầu tiên
+# take(5)-> lấy 5 phần tử kế tiếp
+# orderBy('id','desc')->  sắp xếp ngược bảng
+Route::get('db/getData/skip-take', function () {
+    $data = DB::table('products')->
+            select(DB::raw('id, name, price'))->
+            skip(5)-> 
+            take(5)->
+            orderBy('id','desc')-> # sắp xếp ngược bảng
+            get();
+    foreach ($data as $row) {
+        foreach ($row as $col => $value) {
+           echo $col . ':' . $value . ', ';
+        }
+        echo '<br/>';
+    }
+});
+
+# where('id',12)->  điều kiện id=12
+# update name={name}
+Route::get('db/getData/update/{name}', function ($name) {
+    DB::table('users')->
+        where('id',12)->
+        update(['name'=>$name]);
+    echo 'updated';
+});
+
+# increment('id', 5)->  tăng cột Id 5 giá trị
+Route::get('db/getData/increments', function () {
+    DB::table('users')->
+        increment('id', 5);
+    echo 'incremented';
+});
+
+# decrement('id', 5)->  giảm cột Id 5 giá trị
+Route::get('db/getData/decrements', function () {
+    DB::table('users')->
+        decrement('id', 5);
+    echo 'decremented';
+});
+
+# delete()   xóa dữ liệu trong bảng
+Route::get('db/getData/delete', function () {
+    DB::table('users')->
+        where('id', 1)->
+        delete();
+    echo 'deleted';
+});
+
+# xóa tất cả dữ liệu trong bảng
+Route::get('db/getData/truncate', function () {
+    DB::table('users')->
+        delete();
+    echo 'truncated';
+});
+
+# xóa tất cả dữ liệu trong bảng và reset id = 0
+Route::get('db/getData/truncate', function () {
+    DB::table('users')->
+        truncate();
+    echo 'truncated';
+});
+
+
