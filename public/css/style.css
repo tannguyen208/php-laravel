@@ -1,0 +1,27 @@
+#content {
+    width: 800px;
+    height: 500px;
+    background: #00994d;
+    margin: 0% auto;
+    color: #ffffff;
+    text-align: center;
+    padding-top: 50px;
+}
+#header {
+    width: 800px;
+    height: 50px;
+    background: #00994d;
+    margin: 0% auto;
+    margin-bottom: 10px;
+    color: #ffffff;
+    text-align: center;
+}
+#footer {
+    width: 800px;
+    height: 50px;
+    background: #00994d;
+    margin: 0% auto;
+    margin-top: 10px;
+    color: #ffffff;
+    text-align: center;
+}

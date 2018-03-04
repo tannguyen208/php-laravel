@@ -25,9 +25,10 @@ Route::get('tutorials/{name}', function ($name) {
     return $name . ' là tôi';
 });
 # Regular Expression
-Route::get('tutorials/regularExpression/{name}', function($name) {
+Route::get('regularExpression/{name}', function($name) {
     return $name . ' là tôi, max cute';
 })->where(['name' => '[a-zA-Z0-9]+']); 
+
 
 
 # Named Routes
@@ -38,10 +39,11 @@ Route::get('route-02', function() {
     echo 'route 02';
 })->name('myRoute-02');
 # http://localhost:..../goiten => http://localhost:..../route01
-Route::get('goiten', function() {
+Route::get('returnRoute', function() {
     return redirect()->route('myRoute-01'); 
     # return redirect()->route('myRoute-02');
 });
+
 
 
 # Group -> need perfix
@@ -65,16 +67,56 @@ Route::group(['prefix' => 'myGroup'], function() {
 
 
 # Controller function -> route
-Route::get('controller', 'usersController@welcome');
-Route::get('parameters/{name}', 'usersController@index')->where('name', '[a-z]+');
-Route::get('request-url', 'usersController@store');
+Route::get('getParameters/{name}', 'usersController@getParameters')->where('name', '[a-z]+');
+Route::get('postUpController', 'usersController@postUpController');
 
 
 
 
 # form method(post) in resources/views/tutorials.php
 Route::get('getUser', function() {
-    return view('tutorials');
+    return view('postUser');
 });
+# Route::post('postUser', ['as' => 'postOneUser',  'uses' => 'usersController@postUser']);
+Route::post('postUser', 'usersController@postUser')->name('postOneUser');
 
-Route::post('postUser', ['as' => 'postOneUser',  'uses' => 'usersController@post']);
+
+
+
+# Cookie
+Route::get('setCookie', 'usersController@setCookie')->name('setCookie');
+Route::get('getCookie', 'usersController@getCookie')->name('getCookie');
+
+
+
+
+# Upload file
+Route::get('fileUpload', function () {
+    return view('postUpload');
+});
+Route::post('postUpload', 'usersController@postUpload')->name('postUpload');
+
+
+
+
+# output JSON
+Route::get('getJSON', 'usersController@getJSON')->name('getJSON');
+
+
+
+
+# VIEW
+Route::get('viewTutorial', 'usersController@viewTutorial')->name('viewTutorial');
+Route::get('viewTutorial/{user}', 'usersController@viewTutorialUser')->name('viewTutorialUser');
+view()->share('userViewShare', 'pinnguyen208');
+
+
+
+
+#  Blade template
+Route::get('bladeTemplate', function () {
+    # return view('components.php');       # => return component
+    # return view('components.laravel'); # => return component
+    return view('layouts.viewMaster'); # => return layout master
+});
+Route::get('bladeTemplate/{nameView}', 'usersController@bladeTemplate');
