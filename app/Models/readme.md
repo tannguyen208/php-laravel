@@ -1,5 +1,6 @@
 ### https://laravel.com/docs/5.5/eloquent ###
-## create model ##
+## MODELS
+__create model__
 
     php artisan make:model yourNameModel --migration
     php artisan make:model yourNameModel -m
@@ -7,7 +8,7 @@
 
 
 ### https://laravel.com/docs/5.5/eloquent-relationships#one-to-many-inverse ###
-## model collection ##
+__model collection__
 
     hasOne          => One To One
     hasMany         => One To Many
