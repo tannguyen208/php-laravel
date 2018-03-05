@@ -17,3 +17,8 @@ __model collection__
     hasManyThrough  => Has Many Through
     morphTo         => Polymorphic Relations
     morphedByMany   => Many To Many Polymorphic Relations
+
+
+
+
+    --- end ---

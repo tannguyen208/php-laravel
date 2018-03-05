@@ -3,3 +3,20 @@
 - create 
 
     new file : yourNameViews.blade.php
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+    --- end ---
