@@ -229,6 +229,7 @@ Route::get('db/drop-table-newtable', function () {
 
 # #####################################################################
 # QUERY DB
+# https://laravel.com/docs/5.5/queries
 # #####################################################################
 # DB::table($table)-> bảng {table}
 # get()     lấy dữ liệu => trả về array([0],object())
@@ -360,3 +361,73 @@ Route::get('db/getData/truncate', function () {
 });
 
 
+
+
+# #####################################################################
+# MODEL
+# app/nameModel.php 
+# #####################################################################
+# $u = new App\User(); new 1 class mới 
+# $u->save(); Lưu các giá trị trên vào db
+Route::get('db/model/users/insert', function () {
+    $u = new App\User();
+    $u->name = 'email';
+    $u->email = 'email@gmail.com';
+    $u->password = '123456';
+
+    $u->save();
+    echo 'saved : ' .$u;
+});
+# $u = App\User()::find(4) -> tìm dữ liệu vs id = 4
+Route::get('db/model/users/findId', function () {
+    $u = App\User::find(1);
+    
+    echo 'name : ' .$u->name;
+});
+
+# App\User::delete() delete row with id=4
+Route::get('db/model/users/delete', function () {
+    $u = App\User::find(5);
+    $u->delete();
+    echo 'deleted '.$u;
+});
+
+# App\User::destroy(1) delete row with id = 1 
+Route::get('db/model/users/destroy', function () {
+    App\User::destroy(1);
+    echo 'destroyed';
+});
+
+# insert use model
+Route::get('db/model/categories/insert/{categoryName}', function ($categoryName) {
+    $cat = new App\Models\category();
+    $cat->categoryName = $categoryName;
+    
+    $cat->save();
+    echo 'saved';
+});
+
+# select * from categories use model
+Route::get('db/model/categories/select/all', function () {
+    $cat = App\Models\category::all(); # return to object
+    echo $cat->toJson();
+    # var_dump($cat->toArray());
+});
+
+# select * from categories where id={} use model
+Route::get('db/model/categories/select/id/{id}', function ($id) {
+    $cat = App\Models\category::where('id', $id)->get()->toJson();
+    echo $cat;
+});
+
+# liên kết products with categories
+Route::get('db/model/products/select/id/{id}', function ($id) {
+    $catId = App\Models\product::find(10)->getCategory->toJson();
+    echo $catId;
+});
+
+# liên kết categories with products
+Route::get('db/model/categories/select/id/{id}', function ($id) {
+    $p = App\Models\category::find($id)->getProducts->toJson();
+    echo $p;
+});

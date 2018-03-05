@@ -7,8 +7,6 @@ use Illuminate\Http\Response;
 
 class usersController extends Controller
 {
-    # cmd> php artisan make:controller usersController --resource
-
     # get Parameters
     public function getParameters($name)
     {
