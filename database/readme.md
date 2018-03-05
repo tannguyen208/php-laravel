@@ -1,6 +1,7 @@
 ### https://laravel.com/docs/5.5/migrations
-## Database: Migrations
-- create
+___Database: Migrations___
+
+create
 
     php artisan make:migrate yourNameSeeder
 
@@ -8,31 +9,32 @@
 
     php artisan migrate:make create_users_table --create=users
 
-- run
+run
 
     php artisan migrate
 
-- rollback -last works
+rollback -last works
 
     php artisan migrate:rollback
 
-- reset -null
+reset -null
 
     php artisan migrate:reset
 
-- refresh and run
+refresh and run
 
     php artisan migrate:refresh
     php artisan migrate:refresh --seed
 
 
 ### https://laravel.com/docs/5.5/seeding
-### Database: Seeding
-- create
+___Database: Seeding___
+
+create
 
     php artisan make:seeder yourNameSeeder
 
-- run
+run
 
     php artisan db:seed
     or
@@ -44,4 +46,7 @@
 
 
 
-    --- end ---
+
+
+
+__________END

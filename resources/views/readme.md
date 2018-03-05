@@ -1,6 +1,6 @@
 ### https://laravel.com/docs/5.5/views
 ## view
-- create 
+___create___
 
     new file : yourNameViews.blade.php
 
@@ -19,4 +19,4 @@
     
 
 
-    --- end ---
+__________END

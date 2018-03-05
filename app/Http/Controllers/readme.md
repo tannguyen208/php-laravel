@@ -7,7 +7,10 @@ __Create__
 
 
 ## Spoofing Form Methods
-    Since HTML forms can't make 'PUT', 'PATCH', or 'DELETE' requests, you will need to add a hidden _method field to spoof these HTTP verbs. The method_field helper can create this field for you:
+
+    Since HTML forms can't make 'PUT', 'PATCH', or 'DELETE' requests, 
+    you will need to add a hidden _method field to spoof these HTTP verbs. 
+    The method_field helper can create this field for you:
 
     {{ method_field('PUT') }}
 
@@ -23,4 +26,5 @@ __Create__
     
 
 
-    --- end ---
+
+__________END
