@@ -18,7 +18,7 @@
 
 <details>
   <summary>app</summary>
-  <p>app:name             Set the application namespace</p>
+    <p>app:name             Set the application namespace</p>
 </details>
 
 
@@ -26,7 +26,7 @@
 
 <details>
   <summary>auth</summary>
-  <p>auth:clear-resets    Flush expired password reset tokens</p>
+    <p>auth:clear-resets    Flush expired password reset tokens</p>
 </details>
 
 
@@ -34,9 +34,9 @@
 
 <details>
   <summary>cache</summary>
-  <p>cache:clear          Flush the application cache</p>
-  <p>cache:forget         Remove an item from the cache</p>
-  <p>cache:table          Create a migration for the cache database table</p>
+    <p>cache:clear          Flush the application cache</p>
+    <p>cache:forget         Remove an item from the cache</p>
+    <p>cache:table          Create a migration for the cache database table</p>
 </details>
 
 
@@ -44,8 +44,8 @@
 
 <details>
   <summary>config</summary>
-  <p>config:cache         Create a cache file for faster configuration loading</p>
-  <p>config:clear         Remove the configuration cache file</p>
+    <p>config:cache         Create a cache file for faster configuration loading</p>
+    <p>config:clear         Remove the configuration cache file</p>
 </details>
 
 
@@ -53,7 +53,7 @@
 
 <details>
   <summary>db</summary>
-  <p>db:seed              Seed the database with records</p>
+    <p>db:seed              Seed the database with records</p>
 </details>
 
 
@@ -61,7 +61,7 @@
 
 <details>
   <summary>event</summary>
-  <p>event:generate       Generate the missing events and listeners based on registration</p>
+    <p>event:generate       Generate the missing events and listeners based on registration</p>
 </details>
 
 
@@ -69,7 +69,7 @@
 
 <details>
   <summary>key</summary>
-  <p>key:generate         Set the application key</p>
+    <p>key:generate         Set the application key</p>
 </details>
 
 
@@ -77,7 +77,7 @@
 
 <details>
   <summary>make</summary>
-  <p>
+    <p>
     make:auth            Scaffold basic login and registration views and routes
   </p>
   <p>
