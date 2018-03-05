@@ -1,9 +1,10 @@
 # https://laravel.com/docs/5.5/migrations
 # Database: Migrations
 - create
-> php artisan make:migrate yourNameSeeder
-> php artisan migrate:make add_votes_to_user_table --table=users
-> php artisan migrate:make create_users_table --create=users
+
+    > php artisan make:migrate yourNameSeeder
+    > php artisan migrate:make add_votes_to_user_table --table=users
+    > php artisan migrate:make create_users_table --create=users
 
 - run
 > php artisan migrate
