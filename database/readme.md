@@ -3,7 +3,9 @@
 - create
 
     > php artisan make:migrate yourNameSeeder
+
     > php artisan migrate:make add_votes_to_user_table --table=users
+    
     > php artisan migrate:make create_users_table --create=users
 
 - run
