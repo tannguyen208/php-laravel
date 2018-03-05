@@ -431,3 +431,39 @@ Route::get('db/model/categories/select/id/{id}', function ($id) {
     $p = App\Models\category::find($id)->getProducts->toJson();
     echo $p;
 });
+
+
+
+
+
+
+
+# #####################################################################
+# middleware
+# https://laravel.com/docs/5.5/middleware
+# #####################################################################
+
+# ->middleware('product') in app/Http/Kernal.php
+Route::get('middleware', function () {
+    echo 'middlewared';
+})->middleware('product')->name('p_Middleware');
+
+Route::get('next/middleware', function () {
+    return view('next_middleware');
+})->name('next_p_Middleware');
+
+
+
+# #####################################################################
+# ERROR PAGES
+# #####################################################################
+# 404
+Route::get('404', function () {
+    return view('errors\404');
+})->name('404');
+# 503
+Route::get('503', function () {
+    return view('errors\503');
+})->name('503');
+
+
