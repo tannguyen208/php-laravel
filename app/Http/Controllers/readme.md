@@ -1,8 +1,8 @@
 ### https://laravel.com/docs/5.5/controllers
 ## controllers
 - create
-    > php artisan make:controller yourNameController --resource
-    > php artisan make:controller yourNameController --resource --model=yourNameController
+    php artisan make:controller yourNameController --resource
+    php artisan make:controller yourNameController --resource --model=yourNameController
 
 
 ## Spoofing Form Methods
