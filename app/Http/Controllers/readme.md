@@ -1,6 +1,7 @@
 ### https://laravel.com/docs/5.5/controllers
 ## Controllers
-__create__
+__Create__
+
     php artisan make:controller yourNameController --resource
     php artisan make:controller yourNameController --resource --model=yourNameController
 
