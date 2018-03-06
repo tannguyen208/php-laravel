@@ -7,6 +7,20 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
+- - - -
+## TUTORIALS
+    routes          routes\web.php
+    models          app\Models\nameModel.php
+    controllers     app\Http\Controllers\nameController.php
+    views           resources\views\nameView.blade.php
+    migrations      database\migrations\year_mon_day_time_nameMigrate.php
+    seeds           database\seeds\nameSeeder.php
+    middleware      app\Http\Middleware\nameMiddleware.php
+    auth          
+    session         config\session.php  
+
+
+- - - -
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:

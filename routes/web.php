@@ -455,6 +455,87 @@ Route::get('next/middleware', function () {
 
 
 # #####################################################################
+# Auth - Authenticate
+# #####################################################################
+Route::get('login', 'Auth\LoginController@profile');
+
+Route::get('profile', 'Auth\LoginController@profile');
+Route::post('profile', 'Auth\LoginController@login')->name('loginSystem');
+
+Route::get('logout', 'Auth\LoginController@logout')->name('logout');
+
+
+
+
+
+# #####################################################################
+# SESSION
+# #####################################################################\
+# session()->myMethod = Session::myMethod 
+Route::group(['middleware' => ['web']], function () {
+    # create
+    Route::get('session/create', function () {
+        session()->put('key', '7383-568-3456-4568-7534-3463-3574-3064');
+        echo 'Create Session-> key : ' . session()->get('key');
+    });
+
+
+    # session flash
+    Route::get('session/set-flash', function () {
+        # create session flash
+        # chỉ tồn tại 1 : khi truy cập route
+        session()->flash('flash', '7383-568-3456-4568-7534-3463-3574-3064');
+        echo 'flash Session-> flash : ' . session()->get('flash');
+    }); 
+    Route::get('session/get-flash', function () {
+        # get session flash
+        if(session()->has('flash')) {
+            echo 'Session flash : ' . session()->get('flash');
+        } else {
+            echo 'Value session flash ko tồn tại';
+        }
+    });
+
+
+
+    # select
+    Route::get('session/select/', function () {
+        if(session()->has('key')){
+            echo 'Session-> key : ' . session()->get('key');
+        } else {
+            echo 'Session không tồn tại!';
+        };
+    });
+
+
+    # delete
+    Route::get('session/delete', function () {
+        echo 'Delete Session-> key : ' . session()->get('key');
+        session()->forget('key');
+    });
+
+
+    # delete
+    Route::get('session/deleteAll', function () {
+        session()->flush();
+        echo 'Deleted';
+    });
+
+});
+
+
+
+
+
+# #####################################################################
+# Pagination (phân trang)
+# #####################################################################
+Route::get('pagination','productsController@index');
+
+
+
+
+# #####################################################################
 # ERROR PAGES
 # #####################################################################
 # 404
@@ -467,3 +548,15 @@ Route::get('503', function () {
 })->name('503');
 
 
+
+Auth::routes();
+
+
+
+
+
+# #####################################################################
+# DOWNLOAD EBOOK
+# #####################################################################
+Route::get('download-micro', 'DownloadEbookMicrosoftController@index'); 
+Route::get('linkEbook.json', 'DownloadEbookMicrosoftController@linkEbook'); 

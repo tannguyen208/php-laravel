@@ -13,6 +13,8 @@ class CreateTableZCreate extends Migration
      */
     public function up()
     {
+        Schema::defaultStringLength(191);
+        
         # php artisan make:migration create_table_zCreate --create=zCreate
         Schema::create('zCreate', function (Blueprint $table) {
             $table->increments('id');

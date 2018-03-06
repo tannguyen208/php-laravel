@@ -13,6 +13,8 @@ class CreateTableZTable extends Migration
      */
     public function up()
     {
+        Schema::defaultStringLength(191);
+        
         # php artisan make:migration create_table zTable --table=zTable
         Schema::table('zTable', function (Blueprint $table) {
             //

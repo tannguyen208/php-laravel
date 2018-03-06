@@ -154,11 +154,12 @@ class usersController extends Controller
     public function bladeTemplate($nameView) {
         $value ='<b>' . $nameView . "</b>" ;
         if($nameView == "laravel") {
-            return view('components.laravel',['tutorials'=>$value]);
+            return view('components\laravel',['tutorials'=>$value]);
         } elseif($nameView == "php") {
-            return view('components.php',['tutorials'=>$value]);
+            return view('components\php',['tutorials'=>$value]);
         }
     }
+
 
 
 
